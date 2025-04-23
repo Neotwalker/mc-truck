@@ -87,4 +87,27 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 
+	const textInputs = document.querySelectorAll('input[type="text"]');
+
+	const sanitizeInput = (input) => {
+		input.value = input.value.replace(/https?:\/\/|www\.|\.com|\.ru|\.net|url|ftp|:\/\/|[0-9]+|[\.\-_/\\:@]/gi, '');
+	};
+	
+	textInputs.forEach(input => {
+		// При вводе
+		input.addEventListener('keyup', function () {
+			sanitizeInput(this);
+		});
+		// При вставке
+		input.addEventListener('paste', function (e) {
+			e.preventDefault();
+			let paste = (e.clipboardData || window.clipboardData).getData('text');
+			paste = paste.replace(/https?:\/\/|www\.|\.com|\.ru|\.net|url|ftp|:\/\/|[0-9]+|[\.\-_/\\:@]/gi, '');
+			const start = this.selectionStart;
+			const end = this.selectionEnd;
+			const value = this.value;
+			this.value = value.slice(0, start) + paste + value.slice(end);
+		});
+	});
+	
 });
