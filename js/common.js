@@ -144,56 +144,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const smoothHeight = (itemSelector, buttonSelector, contentSelector) => {
 		const items = document.querySelectorAll(itemSelector);
-
+	
 		if (!items.length) return;
-
-		// Добавляем класс 'active', 'data-open="true"' и устанавливаем max-height первому элементу
-		const firstItem = items[0];
-		const firstButton = firstItem.querySelector(buttonSelector);
-		const firstContent = firstItem.querySelector(contentSelector);
-		firstItem.classList.add('active');
-		firstButton.classList.add('active');
-		firstItem.dataset.open = 'true';
-		firstContent.style.maxHeight = `${firstContent.scrollHeight}px`;
-
+	
 		items.forEach(el => {
 			const button = el.querySelector(buttonSelector);
 			const content = el.querySelector(contentSelector);
-
+	
+			// Инициализация — по умолчанию все закрыты
+			el.dataset.open = 'false';
+			content.style.maxHeight = '';
+	
 			button.addEventListener('click', () => {
-				if (el.dataset.open !== 'true') {
-					// Удаляем параметры для всех элементов, кроме текущего
-					items.forEach(item => {
-						if (item !== el) {
-							item.dataset.open = 'false';
-							item.classList.remove('active');
-							item.querySelector(buttonSelector).classList.remove('active');
-							item.querySelector(contentSelector).style.maxHeight = '';
-						}
-					});
-					el.dataset.open = 'true';
-					button.classList.add('active');
-					el.classList.add('active');
-					content.style.maxHeight = `${content.scrollHeight}px`;
-				} else {
+				const isOpen = el.dataset.open === 'true';
+	
+				if (isOpen) {
+					// Закрыть текущий
 					el.dataset.open = 'false';
 					el.classList.remove('active');
 					button.classList.remove('active');
 					content.style.maxHeight = '';
+				} else {
+					// Открыть текущий
+					el.dataset.open = 'true';
+					el.classList.add('active');
+					button.classList.add('active');
+					content.style.maxHeight = `${content.scrollHeight}px`;
 				}
-			})
-
+			});
+	
+			// Актуализируем max-height при ресайзе
 			const onResize = () => {
 				if (el.dataset.open === 'true') {
-					if (parseInt(content.style.maxHeight) !== content.scrollHeight) {
-						content.style.maxHeight = `${content.scrollHeight}px`;
-					}
+					content.style.maxHeight = `${content.scrollHeight}px`;
 				}
-			}
-
+			};
+	
 			window.addEventListener('resize', onResize);
 		});
-	}
+	};
 	smoothHeight('.main--faq__item', '.main--faq__item--button', '.main--faq__item--answer');
 
 	
