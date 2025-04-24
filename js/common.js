@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+	const mainheader = document.querySelector(".main--header");
+	if (!mainheader || !mainheader.style.backgroundImage) {
+		document.body.classList.add("without-bg");
+	}
+
 	const header = document.querySelector('header');
 	const burgerMenu = document.querySelector('.button--menu');
 	const headermenu = document.querySelector('.header--nav');
@@ -88,11 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	const textInputs = document.querySelectorAll('input[type="text"]');
-
 	const sanitizeInput = (input) => {
 		input.value = input.value.replace(/https?:\/\/|www\.|\.com|\.ru|\.net|url|ftp|:\/\/|[0-9]+|[\.\-_/\\:@]/gi, '');
 	};
-	
 	textInputs.forEach(input => {
 		// При вводе
 		input.addEventListener('keyup', function () {
@@ -109,5 +113,88 @@ document.addEventListener("DOMContentLoaded", () => {
 			this.value = value.slice(0, start) + paste + value.slice(end);
 		});
 	});
+
+	const openBtn = document.querySelector('.open-form');
+	const modal   = document.querySelector('.modal--general');
+	if (openBtn && modal) {
+		// весь код модалки внутри этого блока, без return
+		const closeBtn = modal.querySelector('.modal--close');
+		const htmlEl   = document.documentElement;
+		// ширина скроллбара
+		const getScrollbarWidth = () =>
+			window.innerWidth - document.documentElement.clientWidth;
+		const toggleModal = (show) => {
+			if (show) {
+				const scrollW = getScrollbarWidth();
+				htmlEl.classList.add('hidden');
+				htmlEl.style.paddingRight = scrollW + 'px';
+				modal.classList.add('active');
+			} else {
+				htmlEl.classList.remove('hidden');
+				htmlEl.style.paddingRight = '';
+				modal.classList.remove('active');
+			}
+		};
+		openBtn.addEventListener('click', () => toggleModal(true));
+		closeBtn?.addEventListener('click', () => toggleModal(false));
+		modal.addEventListener('click', e => {
+			if (e.target === modal) toggleModal(false);
+		});
+	}
+
+	const smoothHeight = (itemSelector, buttonSelector, contentSelector) => {
+		const items = document.querySelectorAll(itemSelector);
+
+		if (!items.length) return;
+
+		// Добавляем класс 'active', 'data-open="true"' и устанавливаем max-height первому элементу
+		const firstItem = items[0];
+		const firstButton = firstItem.querySelector(buttonSelector);
+		const firstContent = firstItem.querySelector(contentSelector);
+		firstItem.classList.add('active');
+		firstButton.classList.add('active');
+		firstItem.dataset.open = 'true';
+		firstContent.style.maxHeight = `${firstContent.scrollHeight}px`;
+
+		items.forEach(el => {
+			const button = el.querySelector(buttonSelector);
+			const content = el.querySelector(contentSelector);
+
+			button.addEventListener('click', () => {
+				if (el.dataset.open !== 'true') {
+					// Удаляем параметры для всех элементов, кроме текущего
+					items.forEach(item => {
+						if (item !== el) {
+							item.dataset.open = 'false';
+							item.classList.remove('active');
+							item.querySelector(buttonSelector).classList.remove('active');
+							item.querySelector(contentSelector).style.maxHeight = '';
+						}
+					});
+					el.dataset.open = 'true';
+					button.classList.add('active');
+					el.classList.add('active');
+					content.style.maxHeight = `${content.scrollHeight}px`;
+				} else {
+					el.dataset.open = 'false';
+					el.classList.remove('active');
+					button.classList.remove('active');
+					content.style.maxHeight = '';
+				}
+			})
+
+			const onResize = () => {
+				if (el.dataset.open === 'true') {
+					if (parseInt(content.style.maxHeight) !== content.scrollHeight) {
+						content.style.maxHeight = `${content.scrollHeight}px`;
+					}
+				}
+			}
+
+			window.addEventListener('resize', onResize);
+		});
+	}
+	smoothHeight('.main--faq__item', '.main--faq__item--button', '.main--faq__item--answer');
+
 	
 });
