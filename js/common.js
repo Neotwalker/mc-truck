@@ -114,28 +114,32 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	});
 
-	const openBtn = document.querySelector('.open-form');
+	const openBtns = document.querySelectorAll('.open-form');
 	const modal   = document.querySelector('.modal--general');
-	if (openBtn && modal) {
+	if (openBtns && modal) {
 		// весь код модалки внутри этого блока, без return
 		const closeBtn = modal.querySelector('.modal--close');
 		const htmlEl   = document.documentElement;
 		// ширина скроллбара
-		const getScrollbarWidth = () =>
-			window.innerWidth - document.documentElement.clientWidth;
+		const getScrollbarWidth = () => window.innerWidth - document.documentElement.clientWidth;
 		const toggleModal = (show) => {
 			if (show) {
 				const scrollW = getScrollbarWidth();
 				htmlEl.classList.add('hidden');
-				htmlEl.style.paddingRight = scrollW + 'px';
+				document.body.style.paddingRight = `${scrollW}px`;
 				modal.classList.add('active');
 			} else {
 				htmlEl.classList.remove('hidden');
-				htmlEl.style.paddingRight = '';
+				document.body.style.paddingRight = '';
 				modal.classList.remove('active');
 			}
 		};
-		openBtn.addEventListener('click', () => toggleModal(true));
+		openBtns.forEach(openBtn => {
+			openBtn.addEventListener('click', (e) => {
+				e.preventDefault();
+				toggleModal(true);
+			});
+		});
 		closeBtn?.addEventListener('click', () => toggleModal(false));
 		modal.addEventListener('click', e => {
 			if (e.target === modal) toggleModal(false);
@@ -185,5 +189,67 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 	smoothHeight('.main--faq__item', '.main--faq__item--button', '.main--faq__item--answer');
 
+	const buttons = document.querySelectorAll('.model--info__buttons button');
+	const blocks = document.querySelectorAll('.model--info__block');
+
+	function setActive(index) {
+		// Убираем active со всех кнопок и блоков
+		buttons.forEach(btn => btn.classList.remove('active'));
+		blocks.forEach(block => block.classList.remove('active'));
+
+		// Добавляем active нужной кнопке и блоку
+		buttons[index].classList.add('active');
+		blocks[index].classList.add('active');
+	}
+
+	// Изначально активируем первый элемент
+	setActive(0);
+
+	// Навешиваем обработчики на кнопки
+	buttons.forEach((button, index) => {
+		button.addEventListener('click', () => {
+			setActive(index);
+		});
+	});
+
+	document.querySelectorAll('.table--wrapper').forEach(wrapper => {
+		const titles = wrapper.querySelectorAll('.title');
+		const lists = wrapper.querySelectorAll('.list');
+		if (titles.length === 1 && lists.length === 1) {
+			wrapper.classList.add('single-list');
+		}
+	});
 	
+	document.querySelectorAll('.model--info__option .image').forEach(block => {
+		const img2 = block.querySelector('.image-2');
+		if (!img2) {
+			block.classList.add('no-hover');
+		}
+	});
+
+	document.querySelectorAll('.model--info__option .image').forEach(image => {
+		image.addEventListener('click', function () {
+			const option = this.closest('.model--info__option');
+			if (!option) return;
+	
+			const galleryItems = option.querySelectorAll('.images img');
+			if (galleryItems.length === 0) return;
+	
+			const items = Array.from(galleryItems).map(img => ({
+				src: img.src,
+				type: 'image',
+			}));
+	
+			Fancybox.show(items, {
+				Toolbar: {
+					display: {
+						left: [],
+						middle: [],
+						right: ['close'],
+					},
+				},
+			});
+		});
+	});
+
 });
