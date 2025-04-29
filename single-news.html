@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>Title</title>
+	<meta name="description" content="">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<meta property="og:image" content="path/to/image.jpg">
+	<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">
+
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#34363A">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#34363A">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#34363A">
+
+	<link rel="stylesheet" href="css/main.min.css">
+
+</head>
+
+<body>
+
+	<div class="main--page">
+		<header class="header">
+			<div class="container">
+				<div class="row">
+					<div class="header--wrapper">
+						<div class="header--logo">
+							<a href="index.html" class="logo">
+								<img src="img/logo.svg" alt="Logo">
+							</a>
+						</div>
+						<nav class="header--nav">
+							<ul class="nav">
+								<li><a href="index.html">Главная</a></li>
+								<li><a href="about.html">О компании</a></li>
+								<li><a href="archive-models.html">Модельный ряд</a></li>
+								<li><a href="service.html">Сервис и гарантия</a></li>
+								<li><a href="spare.html">Запчасти</a></li>
+								<li><a href="lising.html">Лизинг</a></li>
+								<li><a href="dealers.html">Дилеры</a></li>
+								<li><a href="archive-news.html">Новостной блок</a></li>
+								<li><a href="contacts.html">Контакты</a></li>
+							</ul>
+						</nav>
+						<button class="button button--menu" title="Открыть меню">
+							<span></span>
+							<span></span>
+							<span></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main class="main news">
+			<section class="section main--header" style="background-image: url(img/main.png);">
+				<div class="container">
+					<div class="row">
+						<div class="main--header__wrapper">
+							<h1 class="h2">МС приглашает на крупнейшую отраслевую выставку COMVEX 2025</h1>
+							<p class="text-2">27-30 мая в МВЦ «КРОКУС ЭКСПО» состоится выставка коммерческого транспорта и технологий — COMVEX.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="section main--news">
+				<div class="container">
+					<div class="row">
+						<div class="main--news__novelty redaktor">
+							<p>
+								Завод грузовых автомобилей МС приглашает вас познакомиться с модельным рядом шасси и получить исчерпывающую информацию о
+								характеристиках каждого автомобиля.
+							</p>
+							<p>
+								Наши специалисты проведут индивидуальную консультацию и помогут подобрать нужный автомобиль под задачи вашего бизнеса.
+							</p>
+							<strong>Наш стенд – К3.1, павильон 3, сектор К.</strong>
+							<p>
+								На стенде будут представлены: 
+							</p>
+							<ul>
+								<li><a href="single-models.html">модель NPR 3.5T</a> – малотоннажный грузовой автомобиль</li>
+								<li><a href="single-models.html">модель NPR 12T</a> – среднетоннажный грузовой автомобиль</li>
+								<li><a href="single-models.html">модель NPR 12T 4х4</a> – среднетоннажный полноприводный грузовой автомобиль</li>
+							</ul>
+							<p>
+								Промокод для бесплатного посещения выставки COMVEX 2025 и стенда завода МС
+							</p>
+							<script>
+								function lcCopyToClipboard(el) {
+									const text = el.getAttribute('data-copy-text');
+									
+									const showTooltip = (message, target) => {
+										let tooltip = document.createElement('div');
+										tooltip.className = 'lc-tooltip';
+										tooltip.innerText = message;
+										document.body.appendChild(tooltip);
+							
+										// Расчёт позиции — чуть выше элемента
+										const rect = target.getBoundingClientRect();
+										tooltip.style.left = rect.right + window.scrollX + 10 + 'px';
+										tooltip.style.top = rect.top + window.scrollY + 15 + 'px';
+							
+										// Плавное появление
+										requestAnimationFrame(() => {
+											tooltip.style.opacity = '1';
+										});
+							
+										// Удаление через 2 секунды
+										setTimeout(() => {
+											tooltip.style.opacity = '0';
+											setTimeout(() => tooltip.remove(), 200);
+										}, 1500);
+									};
+							
+									if (navigator.clipboard && window.isSecureContext) {
+										navigator.clipboard.writeText(text)
+											.then(() => showTooltip('Скопировано!', el))
+											.catch(() => showTooltip('Ошибка', el));
+									} else {
+										let t = document.createElement('textarea');
+										t.value = text;
+										t.style.position = 'fixed';
+										document.body.appendChild(t);
+										t.select();
+										try {
+											document.execCommand('copy');
+											showTooltip('Скопировано!', el);
+										} catch {
+											showTooltip('Ошибка', el);
+										}
+										document.body.removeChild(t);
+									}
+								}
+							
+								window.copyToClipboard = lcCopyToClipboard;
+							</script>
+							<span class="copy-text h3" data-copy-text="EXCMX1M" onclick="lcCopyToClipboard(this)">EXCMX1M</span>
+							<p>
+								Скопируйте данный промокод при помощи нажатия на него и активируйте на сайте https://comvex.ru/registration
+							</p>
+							<p>
+								Чтобы забронировать индивидуальное время консультации со специалистом на выставке, оставьте заявку.
+							</p>
+							<button class="button open-form">Оставить заявку</button>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="footer--wrapper">
+						<div class="footer--left">
+							<div class="header--logo">
+								<a href="index.html" class="logo">
+									<img src="img/logo.svg" alt="Logo">
+								</a>
+							</div>
+							<a href="tel:+78002016774" class="text-header">8 800 2016 774</a>
+							<a href="mailto:info@ms-truck.com" class="text-header">info@ms-truck.com</a>
+						</div>
+						<nav class="footer--nav text-header">
+							<ul class="nav">
+								<li><a href="about.html">О компании</a></li>
+								<li><a href="archive-models.html">Модельный ряд</a></li>
+								<li><a href="service.html">Сервис и гарантия</a></li>
+								<li><a href="spare.html">Запчасти</a></li>
+								<li><a href="lising.html">Лизинг</a></li>
+								<li><a href="dealers.html">Дилеры</a></li>
+								<li><a href="archive-news.html">Новостной блок</a></li>
+								<li><a href="contacts.html">Контакты</a></li>
+							</ul>
+						</nav>
+						<div class="footer--copy">
+							<span class="text-header">2025. Все права защищены</span>
+							<a href="politic.html" class="text-header">Политика конфиденциальности</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<div class="modal modal--general">
+		<div class="modal--wrapper">
+			<div class="modal--border">
+				<div class="modal--close">
+					<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M1 13L13 1M1 1L13 13" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+				</div>
+				<div class="h2">
+					<span>Мы свяжемся с вами</span>
+					<span>в ближайшее время</span>
+				</div>
+				<form action="#" method="post" class="wpcf7-form init" aria-label="Контактная форма" novalidate="novalidate" data-status="init">
+					<span class="wpcf7-form-control-wrap" data-name="fio"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Имя" value="" type="text" name="fio"></span>
+					<span class="wpcf7-form-control-wrap" data-name="tel"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel" aria-required="true" aria-invalid="false" placeholder="+7 (999) 999-99-99" value="" type="tel" name="tel"></span>
+					<span class="accept">Отправляя форму, вы соглашаетесь на обработку персональных данных</span>
+					<button class="button wpcf7-form-control wpcf7-submit" type="submit">
+						<span>отправить</span>
+					</button>
+				</form>
+				<div class="modal--footer">
+					<span class="text-2">Не хотите ждать звонка?<br> Наберите нас прямо сейчас!</span>
+					<a href="tel:+78002016774">8 800 2016 774</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/scripts.min.js"></script>
+
+</body>
+</html>

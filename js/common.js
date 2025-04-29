@@ -193,13 +193,17 @@ document.addEventListener("DOMContentLoaded", () => {
 	const blocks = document.querySelectorAll('.model--info__block');
 
 	function setActive(index) {
-		// Убираем active со всех кнопок и блоков
-		buttons.forEach(btn => btn.classList.remove('active'));
-		blocks.forEach(block => block.classList.remove('active'));
-
-		// Добавляем active нужной кнопке и блоку
-		buttons[index].classList.add('active');
-		blocks[index].classList.add('active');
+		if (!buttons?.length || !blocks?.length) return;
+	
+		// Убираем active со всех
+		buttons.forEach(btn => btn?.classList?.remove('active'));
+		blocks.forEach(block => block?.classList?.remove('active'));
+	
+		// Проверяем существование нужных элементов
+		if (buttons[index] && blocks[index]) {
+			buttons[index].classList.add('active');
+			blocks[index].classList.add('active');
+		}
 	}
 
 	// Изначально активируем первый элемент
@@ -251,5 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			});
 		});
 	});
+
+	
 
 });
