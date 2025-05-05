@@ -146,6 +146,42 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 
+	// Найдём модальное окно успешной отправки
+	// const successModal = document.querySelector('.modal--send');
+	// const successCloseBtn = successModal?.querySelector('.modal--close');
+	// // Функция открытия и закрытия модалки "modal--send"
+	// const toggleSuccessModal = (show) => {
+	// 	if (!successModal) return;
+	// 	const htmlEl = document.documentElement;
+	// 	if (show) {
+	// 		htmlEl.classList.add('hidden');
+	// 		document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`;
+	// 		successModal.classList.add('active');
+
+	// 		// Закрытие через 5 секунд
+	// 		setTimeout(() => {
+	// 			successModal.classList.remove('active');
+	// 			htmlEl.classList.remove('hidden');
+	// 			document.body.style.paddingRight = '';
+	// 		}, 5000);
+	// 	} else {
+	// 		successModal.classList.remove('active');
+	// 		htmlEl.classList.remove('hidden');
+	// 		document.body.style.paddingRight = '';
+	// 	}
+	// };
+	// // Закрытие по клику вне области модального окна
+	// successModal?.addEventListener('click', (e) => {
+	// 	if (e.target === successModal) toggleSuccessModal(false);
+	// });
+	// // Закрытие по нажатию на крестик
+	// successCloseBtn?.addEventListener('click', () => toggleSuccessModal(false));
+	// // Пример вызова toggleSuccessModal(true) после успешной отправки формы
+	// // Это нужно вызывать после получения успешного ответа от Bitrix24
+	// function onFormSuccess() {
+	// 	toggleSuccessModal(true);
+	// }
+
 	const smoothHeight = (itemSelector, buttonSelector, contentSelector) => {
 		const items = document.querySelectorAll(itemSelector);
 	
@@ -191,7 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const buttons = document.querySelectorAll('.model--info__buttons button');
 	const blocks = document.querySelectorAll('.model--info__block');
-
 	function setActive(index) {
 		if (!buttons?.length || !blocks?.length) return;
 	
@@ -205,10 +240,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			blocks[index].classList.add('active');
 		}
 	}
-
 	// Изначально активируем первый элемент
 	setActive(0);
-
 	// Навешиваем обработчики на кнопки
 	buttons.forEach((button, index) => {
 		button.addEventListener('click', () => {
