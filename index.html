@@ -283,14 +283,31 @@
 					<span>Мы свяжемся с вами</span>
 					<span>в ближайшее время</span>
 				</div>
-				<form action="#" method="post" class="wpcf7-form init" aria-label="Контактная форма" novalidate="novalidate" data-status="init">
+				<form class="mctruck-custom-form">
+					<span>
+						<input size="40" maxlength="400" type="text" name="name" placeholder="Имя" value="" required="">
+					</span>
+					<span>
+						<input size="40" maxlength="400" type="tel" name="phone" placeholder="+7 (999) 999-99-99" value="" required="">
+					</span>
+					<span>
+						<input type="hidden" name="comment" value="">
+					</span>
+					<input type="hidden" name="action" value="send_to_mctruck">
+					<input type="hidden" id="nonce" name="nonce" value="c65c6077da"><input type="hidden" name="_wp_http_referer" value="/models/">            <button class="button" type="submit">Отправить</button>
+					<div class="form-message">
+						<div class="h3">мы получили вашу заявку</div>
+						<span class="text-2">Специалист перезвонит вам в ближайшее время</span>
+					</div>
+				</form>
+				<!-- <form action="#" method="post" class="wpcf7-form init" aria-label="Контактная форма" novalidate="novalidate" data-status="init">
 					<span class="wpcf7-form-control-wrap" data-name="fio"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Имя" value="" type="text" name="fio"></span>
 					<span class="wpcf7-form-control-wrap" data-name="tel"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel" aria-required="true" aria-invalid="false" placeholder="+7 (999) 999-99-99" value="" type="tel" name="tel"></span>
 					<span class="accept">Отправляя форму, вы соглашаетесь на обработку персональных данных</span>
 					<button class="button wpcf7-form-control wpcf7-submit" type="submit">
 						<span>отправить</span>
 					</button>
-				</form>
+				</form> -->
 				<div class="modal--footer">
 					<span class="text-2">Не хотите ждать звонка?<br> Наберите нас прямо сейчас!</span>
 					<a href="tel:+78002016774">8 800 2016 774</a>
